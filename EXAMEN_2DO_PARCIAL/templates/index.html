@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD papeleria</title>
+</head>
+<body>
+    
+    <div>
+        <h1>GESTION DE PAPELERIA</h1>
+        {% with mesajes= get_flashed_messages() %}
+            {% if mesajes %}
+                {% for msj in mesajes %}
+                    <h3> {{ msj }}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/guardar" method="post">
+            <input type="text" name="txtNombre" placeholder="Escribe el nombre">
+            <input type="text" name="txtDescripcion" placeholder="Escribe la descripcion">
+            <input type="text" name="txtCosto" placeholder="Escribe el precio">
+            <input type="text" name="txtStock" placeholder="Escribe el stock">
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id:</th>
+                <th>Nombre:</th>
+                <th>Descripción:</th>
+                <th>Costo:</th>
+                <th>Stock:</th>
+                <th>Acciones:</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for pap in listPapeleria %}
+            <tr>
+    
+                <td>{{pap.0}}</td>
+                <td>{{pap.1}}</td>
+                <td>{{pap.2}}</td>
+                <td>{{pap.3}}</td>
+                <td>{{pap.4}}</td>
+                <td>
+                    <a href="/editar/{{pap.0}}">Editar</a>
+                    <a href="/eliminar/{{pap.0}}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</body>
+</html>
